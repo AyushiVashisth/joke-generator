@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import {
   Box,
@@ -38,17 +38,37 @@ const scaleAnimation = keyframes`
   }
 `;
 
+const typewriterAnimation = keyframes`
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+`;
+
 function Joke() {
   const [query, setQuery] = useState("");
   const [joke, setJoke] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showTypewriter, setShowTypewriter] = useState(false);
+  const jokeContainerRef = useRef(null);
   const toast = useToast();
+
+  useEffect(() => {
+    if (joke !== "") {
+      setShowTypewriter(true);
+      animateJokeDisplay();
+    }
+  }, [joke]);
 
   const generateJoke = async () => {
     setLoading(true);
+    setShowTypewriter(false);
+    setJoke("");
     try {
       const response = await axios.get(
-        `https://localhost:8080/jokes?type=${query}`
+        `https://joke-generator-api.onrender.com/jokes?type=${query}`
       );
       setJoke(response.data.joke);
     } catch (error) {
@@ -63,6 +83,22 @@ function Joke() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const animateJokeDisplay = () => {
+    const jokeText = jokeContainerRef.current.innerText;
+    let displayText = "";
+    let currentIndex = 0;
+
+    const typingInterval = setInterval(() => {
+      displayText += jokeText[currentIndex];
+      currentIndex++;
+      jokeContainerRef.current.innerText = displayText;
+
+      if (currentIndex >= jokeText.length) {
+        clearInterval(typingInterval);
+      }
+    }, 50);
   };
 
   return (
@@ -83,9 +119,10 @@ function Joke() {
           borderRadius="xl"
           boxShadow="dark-lg"
           textAlign="center"
+          color="secondary"
           animation={`${slideInAnimation} 0.5s ease`}
         >
-          <Heading as="h1" mb="2rem" color="primary.100">
+          <Heading as="h1" mb="2rem" color="secondary">
             Joke Generator
           </Heading>
           <Input
@@ -97,11 +134,11 @@ function Joke() {
             size="lg"
             variant="filled"
             color={"white"}
-            _focus={{ borderColor: "primary.400", color:"white" }}
+            _focus={{ borderColor: "primary.400", color: "white" }}
             _placeholder={{ color: "black" }}
           />
           <Button
-            colorScheme="secondary"
+            color="secondary"
             onClick={generateJoke}
             mb="1.5rem"
             size="lg"
@@ -109,6 +146,7 @@ function Joke() {
             _hover={{ bg: "secondary", color: "primary.900" }}
             isLoading={loading}
             loadingText="Generating"
+            border={"2px solid yellow"}
           >
             Generate Joke
           </Button>
@@ -133,8 +171,16 @@ function Joke() {
                   isClosable: true,
                 })
               }
+              ref={jokeContainerRef}
             >
-              <Text fontSize="xl" color="primary.900">
+              <Text
+                fontSize="xl"
+                color="secondary"
+                whiteSpace="nowrap"
+                animation={`${typewriterAnimation} ${
+                  joke.length * 50
+                }ms steps(${joke.length + 1})`}
+              >
                 {joke}
               </Text>
             </Box>
