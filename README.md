@@ -3,7 +3,7 @@
 <h1 align="center">✨✨Welcome to Joke-Generator✨✨</h1>
 
 <br/>
-<h3 align="justify" width="80%">A joke generator is a web application that uses ChatGPT to create jokes based on user preferences. The frontend allows users to select the type of joke they want (e.g., knock-knock, light bulb) and customize the content's length. The backend, built with Node.js, manages user requests, interacts with ChatGPT, and delivers the generated jokes. The UI should be visually appealing and include smooth navigation and advanced CSS techniques for an enhanced user experience. Bonus features may include user authentication, saving favorite jokes, and social media sharing capabilities.</h3>
+<h3 align="justify" width="80%">A joke generator is a web application that uses ChatGPT to create jokes based on user preferences. The front end allows users to select the type of joke they want (e.g., knock-knock, light bulb) and customize the content's length. The backend, built with Node.js, manages user requests, interacts with ChatGPT, and delivers the generated jokes. The UI should be visually appealing and include smooth navigation and advanced CSS techniques for an enhanced user experience. Bonus features may include user authentication, saving favourite jokes, and social media sharing capabilities.</h3>
 
 <br/>
 
@@ -67,9 +67,9 @@ The following key features will be implemented in the application:
 <br/>
 
 ## Joke Generator Page
-![Screenshot 2023-07-29 170213](https://github.com/AyushiVashisth/joke-generator/assets/107119119/cb00c69c-abd0-45c2-9cd8-2d3100d449d1)
+![Screenshot 2023-07-29 170945](https://github.com/AyushiVashisth/joke-generator/assets/107119119/ca21223a-8118-43bd-8757-987810b45121)
 
-![Screenshot 2023-07-29 170326](https://github.com/AyushiVashisth/joke-generator/assets/107119119/313ba20f-9e17-4df8-bb13-1be0410dc8ef)
+![Screenshot 2023-07-29 170925](https://github.com/AyushiVashisth/joke-generator/assets/107119119/3ca1b2b6-868b-46cb-b5c0-fff653ea8f4a)
 
  # Languages Used :
 <ul dir="auto">
